@@ -42,23 +42,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django.contrib.sites',
+    
+    'posts',
+    'localusers',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.discord',
+    'allauth.socialaccount.providers.google',
 
-    'posts',
-    'localusers',
+
 ]
 
-SITE_ID = 1
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'all_auth.account..auth_backends.AuthenticationBackend',
-)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,6 +86,11 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'DjangoAllAuth.wsgi.application'
@@ -140,7 +143,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_URL = reverse('account_login') #/account/login
+#LOGIN_URL = reverse('account_login') #/account/login
 
 AUTH_USER_MODEL = 'localusers.LocalUser'
 
@@ -148,3 +151,7 @@ AUTH_USER_MODEL = 'localusers.LocalUser'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SITE_ID = 1
+
+LOGIN_REDIRECT='/'
